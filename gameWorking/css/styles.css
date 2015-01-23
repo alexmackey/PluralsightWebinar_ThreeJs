@@ -1,0 +1,19 @@
+#timer
+{
+	position: absolute;
+	background: blue;
+	right: 0;
+	top: 50%;
+	font-family: Arial;
+	font-size: 60px;
+	width: 200px;
+	height: 70px;
+	z-index: 2;
+	opacity: 0.5;
+}
+
+#container
+{
+	width: 100%;
+	height: 100%;
+}

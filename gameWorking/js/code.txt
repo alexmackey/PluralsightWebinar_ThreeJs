@@ -1,0 +1,125 @@
+function loadObjects(){
+
+			createJump();
+
+			createObstacle({x:20,y:6,z:0});
+			createObstacle({x:50,y:6,z:20});
+			createObstacle({x:10,y:6,z:17});
+			createObstacle({x:10,y:6,z:-10});
+			createObstacle({x:5,y:6,z:-20});
+			createObstacle({x:60,y:6,z:-20});
+			createObstacle({x:70,y:6,z: 0});
+			createObstacle({x:90,y:6,z: -10});
+
+			createFinishLine();
+		}
+
+
+
+		loadObjects();
+
+function handlePlayerDeath(){
+			alert('You are dead!');
+			location.reload();
+		}	
+
+		//uncomment html too
+
+		function setupTimer(){
+
+			function updateTimer(){
+				time-=0.1;
+
+				formattedTime= Math.round(time * 10 ) / 10;
+				document.getElementById("timer").innerHTML=formattedTime;
+
+				if(time===0){
+					document.getElementById("timer").innerHTML="0.0";
+					handlePlayerDeath();
+				}
+				else{
+					setTimeout(updateTimer,100);
+				}
+			}
+
+			setTimeout(updateTimer,100);
+		}
+
+		function createJump(){
+
+			var jumpStand = new Physijs.BoxMesh(
+				new THREE.BoxGeometry(0.5, 3, 45),
+				new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/wood.jpg' ) })
+			);
+
+			jumpStand.position.x=208;
+			jumpStand.position.y=3;
+			jumpStand.position.z=0;
+
+			scene.add(jumpStand);
+
+			var jump = new Physijs.BoxMesh(
+				new THREE.BoxGeometry(25, 0.1, 45),
+				new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/wood.jpg' ) })
+			);
+
+			jump.position.x=199;
+			jump.position.y=5;
+			jump.position.z=0;
+
+			scene.add(jump);
+		}
+
+		
+
+		function createObstacle(position){
+
+			var obstacle = new Physijs.BoxMesh(
+				new THREE.BoxGeometry( 5, 12, 5),
+				new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/rocks.jpg' ) })
+			);
+
+			obstacle.position.set(position.x, position.y, position.z);
+
+			scene.add(obstacle);
+
+			obstacle.addEventListener( 'collision', function( other_object, relative_velocity, relative_rotation, contact_normal ) {
+				if(other_object.name==='player'){
+				   //handlePlayerDeath();
+				}				   
+			});
+
+		}
+
+		function createFinishLine(){
+
+			
+			var finishLine = new THREE.Mesh(new THREE.BoxGeometry(5, 15, 75), 
+				new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5 }));		
+		
+			finishLine.position.x = 255;
+			finishLine.position.y = 9;
+			scene.add(finishLine);
+
+			var realEnd = new Physijs.BoxMesh(
+				new THREE.BoxGeometry(5, 5, 50),
+				new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0 } )
+			);
+
+			realEnd.position.x = 275;
+			realEnd.position.y = 3;
+			scene.add(realEnd);
+
+			realEnd.addEventListener( 'collision', function( other_object, relative_velocity, relative_rotation, contact_normal ) {
+				
+				if(other_object.name==='player'){
+				   alert('You win');
+				   location.reload();
+				}
+
+			});
+		}		
+		
+
+		
+		setupTimer();

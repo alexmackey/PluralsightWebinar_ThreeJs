@@ -1,0 +1,20 @@
+http://hellorun.helloenjoy.com/ (hello run game)
+http://carvisualizer.plus360degrees.com/threejs/ (car visualization)
+http://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html?_r=0 (climbing visualization)
+http://visualizing.org/full-screen/112622 (prism scandal visualization)
+
+http://threejs.org/editor/ (editor)
+https://stemkoski.github.io/Three.js/#materials-solid (good set of examples)
+
+
+http://opengameart.org/sites/default/files/oga-textures/tunnel_road.jpg (example texture)
+http://tf3dm.com/ (3d models)
+
+http://chandlerprall.github.io/Physijs/ (physics engine)
+
+Local demo links
+-------------------------------------------------
+http://localhost/webinarHelloWorld/
+http://localhost/webinarFinal/
+http://localhost/webinarWorking/
+http://localhost/m2_02/ (GUI for properties)
